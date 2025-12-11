@@ -4,9 +4,10 @@ import { CartItem } from '../types';
 interface ConfirmationScreenProps {
   cart: CartItem[];
   onStartNewOrder: () => void;
+  specialRequests?: string;
 }
 
-const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({ cart, onStartNewOrder }) => {
+const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({ cart, onStartNewOrder, specialRequests }) => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => sum + item.item.price * item.quantity, 0);
 
@@ -73,6 +74,12 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({ cart, onStartNe
               <span className="text-2xl font-bold text-gray-800">${totalPrice.toFixed(2)}</span>
             </div>
           </div>
+          {specialRequests && specialRequests.trim() && (
+            <div className="mt-4 pt-4 border-t border-gray-300">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Special Requests</h3>
+              <p className="text-gray-600 bg-gray-50 rounded-lg p-3">{specialRequests}</p>
+            </div>
+          )}
         </div>
 
         <button

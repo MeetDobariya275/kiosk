@@ -9,6 +9,8 @@ interface OrderCompleteScreenProps {
   onOrder: () => void;
   onBackToMenu: () => void;
   onUpdateQuantity: (itemId: string, delta: number) => void;
+  specialRequests?: string;
+  onSpecialRequestsChange?: (requests: string) => void;
 }
 
 const OrderCompleteScreen: React.FC<OrderCompleteScreenProps> = ({ 
@@ -17,7 +19,9 @@ const OrderCompleteScreen: React.FC<OrderCompleteScreenProps> = ({
   onAddItem, 
   onOrder, 
   onBackToMenu, 
-  onUpdateQuantity 
+  onUpdateQuantity,
+  specialRequests = '',
+  onSpecialRequestsChange
 }) => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => sum + item.item.price * item.quantity, 0);
@@ -178,6 +182,20 @@ const OrderCompleteScreen: React.FC<OrderCompleteScreenProps> = ({
                   style={{ width: `${progressPercentage}%` }}
                 />
               </div>
+            </div>
+
+            {/* Special Requests - Fixed at Bottom */}
+            <div className="mb-4 flex-shrink-0">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Special Requests
+              </label>
+              <textarea
+                value={specialRequests}
+                onChange={(e) => onSpecialRequestsChange?.(e.target.value)}
+                placeholder="Any special instructions or requests..."
+                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                rows={3}
+              />
             </div>
 
             {/* Checkout Box - Fixed at Bottom */}

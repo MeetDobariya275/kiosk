@@ -18,6 +18,7 @@ function App() {
     cart: [],
     selectedItem: null,
     selectedCategory: categories[0],
+    specialRequests: '',
   });
 
   const handleOrderTypeSelect = (type: OrderType) => {
@@ -116,6 +117,7 @@ function App() {
       cart: [],
       selectedItem: null,
       selectedCategory: categories[0],
+      specialRequests: '',
     });
   };
 
@@ -132,6 +134,7 @@ function App() {
       cart: [],
       selectedItem: null,
       selectedCategory: categories[0],
+      specialRequests: '',
     });
   };
 
@@ -210,6 +213,8 @@ function App() {
             onOrder={handleOrder}
             onBackToMenu={() => setState(prev => ({ ...prev, currentScreen: 'menu' }))}
             onUpdateQuantity={handleUpdateQuantity}
+            specialRequests={state.specialRequests}
+            onSpecialRequestsChange={(requests) => setState(prev => ({ ...prev, specialRequests: requests }))}
           />
         );
 
@@ -218,6 +223,7 @@ function App() {
           <ConfirmationScreen
             cart={state.cart}
             onStartNewOrder={handleStartNewOrder}
+            specialRequests={state.specialRequests}
           />
         );
 

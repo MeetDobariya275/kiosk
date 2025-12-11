@@ -51,5 +51,6 @@ export interface AppState {
   cart: CartItem[];
   selectedItem: MenuItem | null;
   selectedCategory: string;
+  specialRequests?: string;
 }
 
